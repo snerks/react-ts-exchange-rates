@@ -9,7 +9,6 @@
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
-    "@types/react-dom": "^16.9.5",
     "gh-pages": "^2.2.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
@@ -21,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+    "predeploy": "yarn run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
@@ -40,7 +39,8 @@
     ]
   },
   "devDependencies": {
-    "@types/react": "^16.9.23"
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5"
   },
   "homepage": "https://snerks.github.io/react-ts-exchange-rates"
 }
