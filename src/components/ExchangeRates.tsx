@@ -9,6 +9,14 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox, { CheckboxProps } from "@material-ui/core/Checkbox";
+// import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+// import CheckBoxIcon from '@material-ui/icons/CheckBox';
+// import Favorite from '@material-ui/icons/Favorite';
+// import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -28,6 +36,19 @@ interface ExchangeRatesProps {
 
 const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
   const classes = useStyles();
+
+  const [state, setState] = React.useState({
+    checkedAll: false
+    // checkedB: true,
+    // checkedF: true,
+    // checkedG: true,
+  });
+
+  const handleChange = (name: string) => (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setState({ ...state, [name]: event.target.checked });
+  };
 
   return (
     <>
@@ -53,6 +74,66 @@ const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <FormGroup row style={{ margin: 10 }}>
+        {/* <FormControlLabel
+        control={
+          <Checkbox checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" />
+        }
+        label="Secondary"
+      /> */}
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={state.checkedAll}
+              onChange={handleChange("checkedAll")}
+              value="checkedAll"
+              color="primary"
+            />
+          }
+          label="Show All"
+        />
+        {/* <FormControlLabel control={<Checkbox value="checkedC" />} label="Uncontrolled" />
+      <FormControlLabel disabled control={<Checkbox value="checkedD" />} label="Disabled" />
+      <FormControlLabel disabled control={<Checkbox checked value="checkedE" />} label="Disabled" />
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={state.checkedF}
+            onChange={handleChange('checkedF')}
+            value="checkedF"
+            indeterminate
+          />
+        }
+        label="Indeterminate"
+      /> */}
+
+        {/* <FormControlLabel
+        control={
+          <GreenCheckbox
+            checked={state.checkedG}
+            onChange={handleChange('checkedG')}
+            value="checkedG"
+          />
+        }
+        label="Custom color"
+      />
+      <FormControlLabel
+        control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} value="checkedH" />}
+        label="Custom icon"
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+            checkedIcon={<CheckBoxIcon fontSize="small" />}
+            value="checkedI"
+          />
+        }
+        label="Custom size"
+      /> */}
+      </FormGroup>
+
       <TableContainer component={Paper}>
         <Table
           className={classes.table}
@@ -70,12 +151,26 @@ const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
           <TableBody>
             {Object.entries(data.rates)
               .sort()
-              .map(rate => (
-                <TableRow key={rate[0]}>
-                  <TableCell>{rate[0]}</TableCell>
-                  <TableCell align="right">{rate[1].toFixed(2)}</TableCell>
-                </TableRow>
-              ))}
+              .map(rate => {
+                const isoCode = rate[0];
+
+                const willShow =
+                  state.checkedAll ||
+                  isoCode === "GBP" ||
+                  isoCode === "EUR" ||
+                  isoCode === "USD";
+
+                if (!willShow) {
+                  return null;
+                }
+
+                return (
+                  <TableRow key={rate[0]}>
+                    <TableCell>{rate[0]}</TableCell>
+                    <TableCell align="right">{rate[1].toFixed(2)}</TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
