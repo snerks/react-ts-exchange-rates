@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "028270ce54d13c6c001c05277a046d33",
+    "revision": "dd6b1d24cd00f22c4aad588a847f2a05",
     "url": "/react-ts-exchange-rates/index.html"
   },
   {
-    "revision": "d942cdd5be44e7a275d1",
+    "revision": "cac63df2dff01f37d0ba",
     "url": "/react-ts-exchange-rates/static/css/main.cfb5a67d.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-ts-exchange-rates/static/js/2.29ca4439.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d942cdd5be44e7a275d1",
-    "url": "/react-ts-exchange-rates/static/js/main.2e6ddeef.chunk.js"
+    "revision": "cac63df2dff01f37d0ba",
+    "url": "/react-ts-exchange-rates/static/js/main.8d6c221f.chunk.js"
   },
   {
     "revision": "25f6a8d4b1af94b960f6",
