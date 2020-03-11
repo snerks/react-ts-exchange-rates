@@ -23,6 +23,7 @@ import Checkbox /*, { CheckboxProps } */ from "@material-ui/core/Checkbox";
 // import FormControl from "@material-ui/core/FormControl";
 // import Select from "@material-ui/core/Select";
 import ExchangeRatesForm from "./ExchangeRatesForm";
+import { CurrencyMetadata } from "../models/Currencies";
 
 const useStyles = makeStyles({
   root: {
@@ -181,6 +182,9 @@ const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
           <TableHead>
             <TableRow>
               <TableCell className={classes.th}>Target Currency</TableCell>
+              <TableCell className={classes.th}>Symbol</TableCell>
+              <TableCell className={classes.th}>Name</TableCell>
+
               <TableCell className={classes.th} align="right">
                 Rate
               </TableCell>
@@ -202,9 +206,15 @@ const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
                   return null;
                 }
 
+                const currencyMetadata = CurrencyMetadata[isoCode];
+                const symbol = currencyMetadata ? currencyMetadata.symbol : "";
+                const name = currencyMetadata ? currencyMetadata.name : "";
+
                 return (
                   <TableRow key={rate[0]}>
                     <TableCell>{rate[0]}</TableCell>
+                    <TableCell>{symbol}</TableCell>
+                    <TableCell>{name}</TableCell>
                     <TableCell align="right">{rate[1].toFixed(2)}</TableCell>
                   </TableRow>
                 );
