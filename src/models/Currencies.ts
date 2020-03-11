@@ -1,4 +1,4 @@
-import { ExecFileSyncOptionsWithBufferEncoding } from "child_process";
+// import { ExecFileSyncOptionsWithBufferEncoding } from "child_process";
 
 export interface CurrencyInfo {
   isoCode: string;

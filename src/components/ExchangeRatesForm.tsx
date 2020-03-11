@@ -43,7 +43,7 @@ interface ExchangeRatesFormProps {
 const ExchangeRatesForm: React.FC<ExchangeRatesFormProps> = (
   props: ExchangeRatesFormProps
 ) => {
-  console.log("ExchangeRatesForm.props", props);
+  // console.log("ExchangeRatesForm.props", props);
 
   const classes = useStyles();
   const [
@@ -51,7 +51,6 @@ const ExchangeRatesForm: React.FC<ExchangeRatesFormProps> = (
     setSourceCurrencyIsoCodeNormalised
   ] = useState(props.sourceCurrencyIsoCode || "GBP");
 
-  // setSourceCurrencyIsoCodeNormalised(props.sourceCurrencyIsoCode || "GBP");
   const handleSourceCurrencyChangeLocal = (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
@@ -64,7 +63,6 @@ const ExchangeRatesForm: React.FC<ExchangeRatesFormProps> = (
     const symbol = currencyMetadata ? currencyMetadata.symbol : "";
     const name = currencyMetadata ? currencyMetadata.name : "";
 
-    // const result = `${isoCode} (${symbol}) ${name}`;
     const result = (
       <span title={name}>
         {isoCode} (<strong>{symbol}</strong>) {name}
@@ -130,7 +128,7 @@ const ExchangeRatesForm: React.FC<ExchangeRatesFormProps> = (
             onChange={handleSourceCurrencyChangeLocal}
           >
             {supportedCurrencyIsoCodes.map(isoCode => (
-              <MenuItem value={isoCode}>
+              <MenuItem value={isoCode} key={isoCode}>
                 {getCurrencyItemDisplayName(isoCode)}
               </MenuItem>
             ))}

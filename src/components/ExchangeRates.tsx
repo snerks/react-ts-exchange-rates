@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+// import { useTheme /*, Theme, createStyles */ } from "@material-ui/core/styles";
+import Hidden from "@material-ui/core/Hidden";
+// import withWidth, { WithWidth } from "@material-ui/core/withWidth";
 
 import { makeStyles } from "@material-ui/core/styles";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -11,17 +14,8 @@ import Paper from "@material-ui/core/Paper";
 
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox /*, { CheckboxProps } */ from "@material-ui/core/Checkbox";
-// import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-// import CheckBoxIcon from '@material-ui/icons/CheckBox';
-// import Favorite from '@material-ui/icons/Favorite';
-// import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import Checkbox from "@material-ui/core/Checkbox";
 
-// import InputLabel from "@material-ui/core/InputLabel";
-// import MenuItem from "@material-ui/core/MenuItem";
-// import FormHelperText from "@material-ui/core/FormHelperText";
-// import FormControl from "@material-ui/core/FormControl";
-// import Select from "@material-ui/core/Select";
 import ExchangeRatesForm from "./ExchangeRatesForm";
 import { CurrencyMetadata } from "../models/Currencies";
 
@@ -45,12 +39,36 @@ const useStyles = makeStyles({
   }
 });
 
+// const useStyles = makeStyles((theme: Theme) =>
+//   createStyles({
+//     root: {
+//       flexGrow: 1,
+//     },
+//     container: {
+//       display: 'flex',
+//       flexWrap: 'wrap',
+//     },
+//     paper: {
+//       padding: theme.spacing(2),
+//       textAlign: 'center',
+//       color: theme.palette.text.secondary,
+//       flex: '1 0 auto',
+//       margin: theme.spacing(1),
+//     },
+//   }),
+// );
+
 interface ExchangeRatesProps {
   data: ExchangeRateLatestResponse;
 }
 
 const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
   const classes = useStyles();
+
+  // const theme = useTheme();
+  // const breakpoints = theme.breakpoints;
+
+  // console.log("breakpoints", breakpoints);
 
   const [state, setState] = React.useState({
     checkedAll: false
@@ -102,25 +120,6 @@ const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
       </TableContainer>
 
       <FormGroup row style={{ margin: 10 }}>
-        {/* <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">Source Currency</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={sourceCourrencyIsoCodeNormalised}
-            onChange={handleSourceCurrencyChange}
-          >
-            <MenuItem value={"GBP"}>GBP</MenuItem>
-            <MenuItem value={"EUR"}>EUR</MenuItem>
-            <MenuItem value={"USD"}>USD</MenuItem>
-          </Select>
-        </FormControl> */}
-        {/* <FormControlLabel
-        control={
-          <Checkbox checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" />
-        }
-        label="Secondary"
-      /> */}
         <FormControlLabel
           control={
             <Checkbox
@@ -132,45 +131,6 @@ const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
           }
           label="Show All"
         />
-        {/* <FormControlLabel control={<Checkbox value="checkedC" />} label="Uncontrolled" />
-      <FormControlLabel disabled control={<Checkbox value="checkedD" />} label="Disabled" />
-      <FormControlLabel disabled control={<Checkbox checked value="checkedE" />} label="Disabled" />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={state.checkedF}
-            onChange={handleChange('checkedF')}
-            value="checkedF"
-            indeterminate
-          />
-        }
-        label="Indeterminate"
-      /> */}
-
-        {/* <FormControlLabel
-        control={
-          <GreenCheckbox
-            checked={state.checkedG}
-            onChange={handleChange('checkedG')}
-            value="checkedG"
-          />
-        }
-        label="Custom color"
-      />
-      <FormControlLabel
-        control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} value="checkedH" />}
-        label="Custom icon"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
-            checkedIcon={<CheckBoxIcon fontSize="small" />}
-            value="checkedI"
-          />
-        }
-        label="Custom size"
-      /> */}
       </FormGroup>
 
       <TableContainer component={Paper}>
@@ -181,6 +141,9 @@ const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
         >
           <TableHead>
             <TableRow>
+              <Hidden xsDown>
+                <TableCell className={classes.th}>Target</TableCell>
+              </Hidden>
               {/* <TableCell className={classes.th}>Target</TableCell> */}
               <TableCell className={classes.th} style={{ width: 20 }}>
                 Symbol
@@ -215,6 +178,9 @@ const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
                 return (
                   <TableRow key={rate[0]}>
                     {/* <TableCell>{rate[0]}</TableCell> */}
+                    <Hidden xsDown>
+                      <TableCell>{rate[0]}</TableCell>
+                    </Hidden>
                     <TableCell style={{ width: 20 }}>{symbol}</TableCell>
                     <TableCell>{name}</TableCell>
                     <TableCell align="right">{rate[1].toFixed(4)}</TableCell>
@@ -247,9 +213,9 @@ const FetchExchangeRateLatest = (props: FetchExchangeRateLatestProps) => {
   const handleSourceCurrencyChange = (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
-    console.log("ExchangeRate: handleSourceCurrencyChange : START");
+    // console.log("ExchangeRate: handleSourceCurrencyChange : START");
     setSourceCurrencyIsoCodeNormalised(event.target.value as string);
-    console.log("ExchangeRate: handleSourceCurrencyChange : END");
+    // console.log("ExchangeRate: handleSourceCurrencyChange : END");
   };
 
   async function fetchExchangeRates() {
