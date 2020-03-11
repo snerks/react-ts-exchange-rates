@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
+import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -14,7 +15,10 @@ const useStyles = makeStyles({
     overflowX: "auto"
   },
   table: {
-    minWidth: 650
+    // minWidth: 650
+  },
+  th: {
+    fontWeight: 900
   }
 });
 
@@ -26,41 +30,54 @@ const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.root}>
-      <Table className={classes.table} aria-label="Source Currency">
-        <TableHead>
-          <TableRow>
-            <TableCell>Source Currency ISO Code</TableCell>
-            <TableCell>Date</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            <TableCell>{data.base}</TableCell>
-            <TableCell>{data.date}</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-
-      <Table className={classes.table} aria-label="Exchange Rates">
-        <TableHead>
-          <TableRow>
-            <TableCell>Target Currency ISO Code</TableCell>
-            <TableCell>Rate</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {Object.entries(data.rates)
-            .sort()
-            .map(rate => (
-              <TableRow key={rate[0]}>
-                <TableCell>{rate[0]}</TableCell>
-                <TableCell>{rate[1]}</TableCell>
-              </TableRow>
-            ))}
-        </TableBody>
-      </Table>
-    </Paper>
+    <>
+      <TableContainer component={Paper}>
+        <Table
+          className={classes.table}
+          size="small"
+          aria-label="Source Currency"
+        >
+          <TableHead>
+            <TableRow>
+              <TableCell className={classes.th}>Source Currency</TableCell>
+              <TableCell className={classes.th}>Date</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow>
+              <TableCell component="th" scope="row">
+                {data.base}
+              </TableCell>
+              <TableCell>{data.date}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TableContainer component={Paper}>
+        <Table
+          className={classes.table}
+          size="small"
+          aria-label="Exchange Rates"
+        >
+          <TableHead>
+            <TableRow>
+              <TableCell className={classes.th}>Target Currency</TableCell>
+              <TableCell className={classes.th}>Rate</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {Object.entries(data.rates)
+              .sort()
+              .map(rate => (
+                <TableRow key={rate[0]}>
+                  <TableCell>{rate[0]}</TableCell>
+                  <TableCell>{rate[1]}</TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 };
 
