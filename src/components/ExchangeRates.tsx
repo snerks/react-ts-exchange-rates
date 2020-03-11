@@ -215,7 +215,7 @@ const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
                     <TableCell>{rate[0]}</TableCell>
                     <TableCell>{symbol}</TableCell>
                     <TableCell>{name}</TableCell>
-                    <TableCell align="right">{rate[1].toFixed(2)}</TableCell>
+                    <TableCell align="right">{rate[1].toFixed(4)}</TableCell>
                   </TableRow>
                 );
               })}

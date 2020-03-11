@@ -9,6 +9,7 @@ import {
   InputLabel
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { CurrencyMetadata } from "../models/Currencies";
 // import classes from "*.module.css";
 
 const useStyles = makeStyles({
@@ -58,6 +59,56 @@ const ExchangeRatesForm: React.FC<ExchangeRatesFormProps> = (
     props.handleSourceCurrencyChange(event);
   };
 
+  const getCurrencyItemDisplayName = (isoCode: string) => {
+    const currencyMetadata = CurrencyMetadata[isoCode];
+    const symbol = currencyMetadata ? currencyMetadata.symbol : "";
+    const name = currencyMetadata ? currencyMetadata.name : "";
+
+    const result = `${isoCode} - ${symbol} - ${name}`;
+
+    return result;
+  };
+
+  const supportedCurrencyIsoCodes = [
+    "GBP",
+    "EUR",
+    "USD",
+
+    "AUD",
+    "BGN",
+    "BRL",
+    "CAD",
+    "CHF",
+    "CNY",
+    "CZK",
+
+    "DKK",
+    "HKD",
+    "HRK",
+    "HUF",
+    "IDR",
+    "ILS",
+    "INR",
+    "ISK",
+
+    "JPY",
+    "KRW",
+    "MXN",
+    "MYR",
+    "NOK",
+    "NZD",
+    "PHP",
+    "PLN",
+    "RON",
+    "RUB",
+
+    "SEK",
+    "SGD",
+    "THB",
+    "TRY",
+    "ZAR"
+  ];
+
   return (
     <>
       {/* <h1>
@@ -66,47 +117,18 @@ const ExchangeRatesForm: React.FC<ExchangeRatesFormProps> = (
       </h1> */}
       <FormGroup row style={{ margin: 10 }}>
         <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">Source</InputLabel>
+          <InputLabel id="demo-simple-select-label">Source Currency</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={sourceCurrencyIsoCodeNormalised}
             onChange={handleSourceCurrencyChangeLocal}
           >
-            <MenuItem value={"GBP"}>GBP</MenuItem>
-            <MenuItem value={"EUR"}>EUR</MenuItem>
-            <MenuItem value={"USD"}>USD</MenuItem>
-
-            <MenuItem value={"AUD"}>AUD</MenuItem>
-            <MenuItem value={"BGN"}>BGN</MenuItem>
-            <MenuItem value={"BRL"}>BRL</MenuItem>
-            <MenuItem value={"CAD"}>CAD</MenuItem>
-            <MenuItem value={"CHF"}>CHF</MenuItem>
-            <MenuItem value={"CNY"}>CNY</MenuItem>
-            <MenuItem value={"CZK"}>CZK</MenuItem>
-            <MenuItem value={"DKK"}>DKK</MenuItem>
-            <MenuItem value={"HKD"}>HKD</MenuItem>
-            <MenuItem value={"HRK"}>HRK</MenuItem>
-            <MenuItem value={"HUF"}>HUF</MenuItem>
-            <MenuItem value={"IDR"}>IDR</MenuItem>
-            <MenuItem value={"ILS"}>ILS</MenuItem>
-            <MenuItem value={"INR"}>INR</MenuItem>
-            <MenuItem value={"ISK"}>ISK</MenuItem>
-            <MenuItem value={"JPY"}>JPY</MenuItem>
-            <MenuItem value={"KRW"}>KRW</MenuItem>
-            <MenuItem value={"MXN"}>MXN</MenuItem>
-            <MenuItem value={"MYR"}>MYR</MenuItem>
-            <MenuItem value={"NOK"}>NOK</MenuItem>
-            <MenuItem value={"NZD"}>NZD</MenuItem>
-            <MenuItem value={"PHP"}>PHP</MenuItem>
-            <MenuItem value={"PLN"}>PLN</MenuItem>
-            <MenuItem value={"RON"}>RON</MenuItem>
-            <MenuItem value={"RUB"}>RUB</MenuItem>
-            <MenuItem value={"SEK"}>SEK</MenuItem>
-            <MenuItem value={"SGD"}>SGD</MenuItem>
-            <MenuItem value={"THB"}>THB</MenuItem>
-            <MenuItem value={"TRY"}>TRY</MenuItem>
-            <MenuItem value={"ZAR"}>ZAR</MenuItem>
+            {supportedCurrencyIsoCodes.map(isoCode => (
+              <MenuItem value={isoCode}>
+                {getCurrencyItemDisplayName(isoCode)}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </FormGroup>
