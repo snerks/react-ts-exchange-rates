@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
   formControl: {
     // margin: theme.spacing(1),
-    minWidth: 120
+    minWidth: 160
   },
   selectEmpty: {
     // marginTop: theme.spacing(2),
@@ -64,7 +64,12 @@ const ExchangeRatesForm: React.FC<ExchangeRatesFormProps> = (
     const symbol = currencyMetadata ? currencyMetadata.symbol : "";
     const name = currencyMetadata ? currencyMetadata.name : "";
 
-    const result = `${isoCode} - ${symbol} - ${name}`;
+    // const result = `${isoCode} (${symbol}) ${name}`;
+    const result = (
+      <span title={name}>
+        {isoCode} (<strong>{symbol}</strong>) {name}
+      </span>
+    );
 
     return result;
   };
