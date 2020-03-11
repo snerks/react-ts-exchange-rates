@@ -181,8 +181,10 @@ const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
         >
           <TableHead>
             <TableRow>
-              <TableCell className={classes.th}>Target Currency</TableCell>
-              <TableCell className={classes.th}>&nbsp;</TableCell>
+              {/* <TableCell className={classes.th}>Target</TableCell> */}
+              <TableCell className={classes.th} style={{ width: 20 }}>
+                &nbsp;
+              </TableCell>
               <TableCell className={classes.th}>Name</TableCell>
 
               <TableCell className={classes.th} align="right">
@@ -212,8 +214,8 @@ const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
 
                 return (
                   <TableRow key={rate[0]}>
-                    <TableCell>{rate[0]}</TableCell>
-                    <TableCell>{symbol}</TableCell>
+                    {/* <TableCell>{rate[0]}</TableCell> */}
+                    <TableCell style={{ width: 20 }}>{symbol}</TableCell>
                     <TableCell>{name}</TableCell>
                     <TableCell align="right">{rate[1].toFixed(4)}</TableCell>
                   </TableRow>
