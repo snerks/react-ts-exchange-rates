@@ -183,7 +183,7 @@ const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
             <TableRow>
               {/* <TableCell className={classes.th}>Target</TableCell> */}
               <TableCell className={classes.th} style={{ width: 20 }}>
-                &nbsp;
+                Symbol
               </TableCell>
               <TableCell className={classes.th}>Name</TableCell>
 
