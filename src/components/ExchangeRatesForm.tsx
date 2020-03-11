@@ -76,6 +76,37 @@ const ExchangeRatesForm: React.FC<ExchangeRatesFormProps> = (
             <MenuItem value={"GBP"}>GBP</MenuItem>
             <MenuItem value={"EUR"}>EUR</MenuItem>
             <MenuItem value={"USD"}>USD</MenuItem>
+
+            <MenuItem value={"AUD"}>AUD</MenuItem>
+            <MenuItem value={"BGN"}>BGN</MenuItem>
+            <MenuItem value={"BRL"}>BRL</MenuItem>
+            <MenuItem value={"CAD"}>CAD</MenuItem>
+            <MenuItem value={"CHF"}>CHF</MenuItem>
+            <MenuItem value={"CNY"}>CNY</MenuItem>
+            <MenuItem value={"CZK"}>CZK</MenuItem>
+            <MenuItem value={"DKK"}>DKK</MenuItem>
+            <MenuItem value={"HKD"}>HKD</MenuItem>
+            <MenuItem value={"HRK"}>HRK</MenuItem>
+            <MenuItem value={"HUF"}>HUF</MenuItem>
+            <MenuItem value={"IDR"}>IDR</MenuItem>
+            <MenuItem value={"ILS"}>ILS</MenuItem>
+            <MenuItem value={"INR"}>INR</MenuItem>
+            <MenuItem value={"ISK"}>ISK</MenuItem>
+            <MenuItem value={"JPY"}>JPY</MenuItem>
+            <MenuItem value={"KRW"}>KRW</MenuItem>
+            <MenuItem value={"MXN"}>MXN</MenuItem>
+            <MenuItem value={"MYR"}>MYR</MenuItem>
+            <MenuItem value={"NOK"}>NOK</MenuItem>
+            <MenuItem value={"NZD"}>NZD</MenuItem>
+            <MenuItem value={"PHP"}>PHP</MenuItem>
+            <MenuItem value={"PLN"}>PLN</MenuItem>
+            <MenuItem value={"RON"}>RON</MenuItem>
+            <MenuItem value={"RUB"}>RUB</MenuItem>
+            <MenuItem value={"SEK"}>SEK</MenuItem>
+            <MenuItem value={"SGD"}>SGD</MenuItem>
+            <MenuItem value={"THB"}>THB</MenuItem>
+            <MenuItem value={"TRY"}>TRY</MenuItem>
+            <MenuItem value={"ZAR"}>ZAR</MenuItem>
           </Select>
         </FormControl>
       </FormGroup>

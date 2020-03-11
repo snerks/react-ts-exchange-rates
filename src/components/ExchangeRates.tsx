@@ -263,10 +263,6 @@ const FetchExchangeRateLatest = (props: FetchExchangeRateLatestProps) => {
         <div>
           {data && (
             <>
-              {/* <h1>
-                ExchangeRates.sourceCurrencyIsoCodeNormalised = [
-                {sourceCurrencyIsoCodeNormalised}]
-              </h1> */}
               <ExchangeRatesForm
                 sourceCurrencyIsoCode={sourceCurrencyIsoCodeNormalised}
                 handleSourceCurrencyChange={handleSourceCurrencyChange}
