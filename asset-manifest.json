@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/react-ts-exchange-rates/static/css/main.cfb5a67d.chunk.css",
-    "main.js": "/react-ts-exchange-rates/static/js/main.cd0d2d49.chunk.js",
-    "main.js.map": "/react-ts-exchange-rates/static/js/main.cd0d2d49.chunk.js.map",
+    "main.js": "/react-ts-exchange-rates/static/js/main.d6e93ae0.chunk.js",
+    "main.js.map": "/react-ts-exchange-rates/static/js/main.d6e93ae0.chunk.js.map",
     "runtime-main.js": "/react-ts-exchange-rates/static/js/runtime-main.73f56f11.js",
     "runtime-main.js.map": "/react-ts-exchange-rates/static/js/runtime-main.73f56f11.js.map",
     "static/js/2.2d0a4c7d.chunk.js": "/react-ts-exchange-rates/static/js/2.2d0a4c7d.chunk.js",
     "static/js/2.2d0a4c7d.chunk.js.map": "/react-ts-exchange-rates/static/js/2.2d0a4c7d.chunk.js.map",
     "index.html": "/react-ts-exchange-rates/index.html",
-    "precache-manifest.7c866c899a8d2983724346ead530cc16.js": "/react-ts-exchange-rates/precache-manifest.7c866c899a8d2983724346ead530cc16.js",
+    "precache-manifest.da9a21c2f2b10a8c81d7cedc26bdbb92.js": "/react-ts-exchange-rates/precache-manifest.da9a21c2f2b10a8c81d7cedc26bdbb92.js",
     "service-worker.js": "/react-ts-exchange-rates/service-worker.js",
     "static/css/main.cfb5a67d.chunk.css.map": "/react-ts-exchange-rates/static/css/main.cfb5a67d.chunk.css.map",
     "static/js/2.2d0a4c7d.chunk.js.LICENSE.txt": "/react-ts-exchange-rates/static/js/2.2d0a4c7d.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.73f56f11.js",
     "static/js/2.2d0a4c7d.chunk.js",
     "static/css/main.cfb5a67d.chunk.css",
-    "static/js/main.cd0d2d49.chunk.js"
+    "static/js/main.d6e93ae0.chunk.js"
   ]
 }
