@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
 import FetchExchangeRateLatest from "./components/ExchangeRates";
 
@@ -21,7 +21,9 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    <FetchExchangeRateLatest />
+    <>
+      <FetchExchangeRateLatest sourceCurrencyIsoCode="GBP" />
+    </>
   );
 }
 
