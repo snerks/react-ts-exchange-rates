@@ -216,6 +216,45 @@ const ExchangeRatesDateRange: React.FC<ExchangeRatesDateRangeProps> = ({
 
   // const json = JSON.stringify(data, null, 2);
 
+  const getEndDateRateElement = (
+    data: ExchangeRateDateRangeResponse,
+    isoCode: string
+  ) => {
+    return (
+      <span>
+        {data.end_at &&
+          data.rates[data.end_at.toString()] &&
+          data.rates[data.end_at.toString()][isoCode].toFixed(4)}
+      </span>
+    );
+  };
+
+  const getDirectionElement = (
+    data: ExchangeRateDateRangeResponse,
+    isoCode: string,
+    startDateRate: number
+  ) => {
+    return (
+      <span>
+        {data.end_at &&
+          data.rates[data.end_at.toString()] &&
+          data.rates[data.end_at.toString()][isoCode] &&
+          data.rates[data.end_at.toString()][isoCode] > startDateRate ? (
+            <strong>
+              <span style={{ color: "green" }}>⯅</span>
+            </strong>
+          ) : data.end_at &&
+            data.rates[data.end_at.toString()] &&
+            data.rates[data.end_at.toString()][isoCode] &&
+            data.rates[data.end_at.toString()][isoCode] < startDateRate ? (
+              <strong>
+                <span style={{ color: "red" }}>⯆</span>
+              </strong>
+            ) : null}
+      </span>
+    );
+  };
+
   return (
     data && (
       // <pre>{json}</pre>
@@ -300,6 +339,7 @@ const ExchangeRatesDateRange: React.FC<ExchangeRatesDateRangeProps> = ({
                   .sort()
                   .map(rate => {
                     const isoCode = rate[0];
+                    const startDateRate = rate[1];
 
                     const willShow =
                       state.checkedAll ||
@@ -330,52 +370,10 @@ const ExchangeRatesDateRange: React.FC<ExchangeRatesDateRangeProps> = ({
                           {rate[1].toFixed(4)}
                         </TableCell>
                         <TableCell align="right">
-                          {/* {data.rates[data.end_at.toString()].rates &&
-                            data.rates[data.end_at.toString()].rates[
-                              isoCode
-                            ].toFixed(4)} */}
-                          {/* {
-                            <pre>
-                              {data.end_at &&
-                                JSON.stringify(
-                                  data.rates[data.end_at.toString()].rates,
-                                  null,
-                                  2
-                                )}
-                            </pre>
-                          } */}
-                          <div>
-                            {/* <span>{isoCode}&nbsp;</span>
-                            <span>{data.end_at && data.end_at.toString()}</span> */}
-                            <span>
-                              {data.end_at &&
-                                data.rates[data.end_at.toString()] &&
-                                data.rates[data.end_at.toString()][
-                                  isoCode
-                                ].toFixed(4)}
-                            </span>{" "}
-                          </div>
+                          {getEndDateRateElement(data, isoCode)}
                         </TableCell>
                         <TableCell align="center">
-                          <span>
-                            {data.end_at &&
-                            data.rates[data.end_at.toString()] &&
-                            data.rates[data.end_at.toString()][isoCode] &&
-                            data.rates[data.end_at.toString()][isoCode] >
-                              rate[1] ? (
-                              <strong>
-                                <span style={{ color: "green" }}>⯅</span>
-                              </strong>
-                            ) : data.end_at &&
-                              data.rates[data.end_at.toString()] &&
-                              data.rates[data.end_at.toString()][isoCode] &&
-                              data.rates[data.end_at.toString()][isoCode] <
-                                rate[1] ? (
-                              <strong>
-                                <span style={{ color: "red" }}>⯆</span>
-                              </strong>
-                            ) : null}
-                          </span>
+                          {getDirectionElement(data, isoCode, startDateRate)}
                         </TableCell>
                       </TableRow>
                     );
@@ -409,24 +407,40 @@ const ExchangeRatesDateRange: React.FC<ExchangeRatesDateRangeProps> = ({
 
 interface FetchExchangeRateLatestProps {
   sourceCurrencyIsoCode: string;
+  endDateDaysAgo?: number
 }
 
 const FetchExchangeRateLatest = (props: FetchExchangeRateLatestProps) => {
+
+  const getDateFromDaysAgo = (daysAgo: number) => {
+    const ONE_DAY = 1000 * 60 * 60 * 24;
+
+    const daysInMilliseconds = ONE_DAY * daysAgo;
+
+    const result = new Date((new Date()).valueOf() - daysInMilliseconds);
+
+    return result;
+  }
+
   const [data, setData] = useState<ExchangeRateLatestResponse | undefined>(
     undefined
   );
 
-  const [previousData, setPreviousData] = useState<
-    ExchangeRateLatestResponse | undefined
-  >(undefined);
+  const [endDateDaysAgo, setEndDateDaysAgo] = useState(props.endDateDaysAgo ?? 0);
+
+  // const [previousData, setPreviousData] = useState<
+  //   ExchangeRateLatestResponse | undefined
+  // >(undefined);
 
   const [dateRangeData, setDateRangeData] = useState<
     ExchangeRateDateRangeResponse
   >({
     base: "GBP",
     rates: {},
-    start_at: new Date("2020-03-16"),
-    end_at: new Date("2020-03-17")
+    // start_at: new Date("2020-03-16"),
+    // end_at: new Date("2020-03-17")
+    start_at: getDateFromDaysAgo(endDateDaysAgo + 1),
+    end_at: getDateFromDaysAgo(endDateDaysAgo)
   });
 
   const [loading, setLoading] = useState(true);
@@ -457,44 +471,45 @@ const FetchExchangeRateLatest = (props: FetchExchangeRateLatestProps) => {
 
   // https://api.exchangeratesapi.io/2020-03-16?base=GBP
 
-  async function fetchPreviousExchangeRates() {
-    const currentDate = new Date();
-    const currentDateIso = currentDate.toISOString();
+  // async function fetchPreviousExchangeRates() {
+  //   const currentDate = new Date();
+  //   const currentDateIso = currentDate.toISOString();
 
-    console.log("fetchPreviousExchangeRates");
+  //   console.log("fetchPreviousExchangeRates");
 
-    // console.log(currentDateIso);
+  //   // console.log(currentDateIso);
 
-    // const datePrevious: string;
-    const dateIso = "2020-03-16";
+  //   // const datePrevious: string;
+  //   const dateIso = "2020-03-16";
 
-    console.log(dateIso);
+  //   console.log(dateIso);
 
-    const url = `https://api.exchangeratesapi.io/${dateIso}?base=${sourceCurrencyIsoCodeNormalised}`;
+  //   const url = `https://api.exchangeratesapi.io/${dateIso}?base=${sourceCurrencyIsoCodeNormalised}`;
 
-    const responseJson = await fetch(url);
+  //   const responseJson = await fetch(url);
 
-    const response: ExchangeRateLatestResponse = await responseJson.json();
+  //   const response: ExchangeRateLatestResponse = await responseJson.json();
 
-    console.log(currentDateIso);
+  //   console.log(currentDateIso);
 
-    setPreviousData(response);
-    setLoading(false);
-  }
+  //   setPreviousData(response);
+  //   setLoading(false);
+  // }
 
   // ExchangeRateDateRangeResponse
 
   async function fetchExchangeRatesDateRange() {
     const currentDate = new Date();
-    const currentDateIso = currentDate.toISOString();
+    // const currentDateIso = currentDate.toISOString();
 
     console.log("fetchExchangeRatesDateRange");
 
     // console.log(currentDateIso);
 
     // const datePrevious: string;
-    const startDateIso = "2020-03-16";
-    const endDateIso = "2020-03-17";
+    // const endDateDaysAgo = 2;
+    const startDateIso = getDateFromDaysAgo(endDateDaysAgo + 1).toISOString().split("T")[0];
+    const endDateIso = getDateFromDaysAgo(endDateDaysAgo).toISOString().split("T")[0];
 
     console.log(`startDateIso = ${startDateIso}`);
     console.log(`endDateIso = ${endDateIso}`);
@@ -524,22 +539,22 @@ const FetchExchangeRateLatest = (props: FetchExchangeRateLatestProps) => {
       {loading ? (
         <div>...loading</div>
       ) : (
-        <div>
-          {data && (
-            <>
-              <ExchangeRatesForm
-                sourceCurrencyIsoCode={sourceCurrencyIsoCodeNormalised}
-                handleSourceCurrencyChange={handleSourceCurrencyChange}
-              />
-              {/* <ExchangeRates data={data} /> */}
+          <div>
+            {data && (
+              <>
+                <ExchangeRatesForm
+                  sourceCurrencyIsoCode={sourceCurrencyIsoCodeNormalised}
+                  handleSourceCurrencyChange={handleSourceCurrencyChange}
+                />
+                {/* <ExchangeRates data={data} /> */}
 
-              <hr></hr>
+                <hr></hr>
 
-              <ExchangeRatesDateRange data={dateRangeData} />
-            </>
-          )}
-        </div>
-      )}
+                <ExchangeRatesDateRange data={dateRangeData} />
+              </>
+            )}
+          </div>
+        )}
     </div>
   );
 };

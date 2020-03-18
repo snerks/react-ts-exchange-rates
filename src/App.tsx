@@ -22,7 +22,7 @@ function App() {
     //   </header>
     // </div>
     <>
-      <FetchExchangeRateLatest sourceCurrencyIsoCode="GBP" />
+      <FetchExchangeRateLatest sourceCurrencyIsoCode="GBP" endDateDaysAgo={1} />
     </>
   );
 }
