@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
-// import { useTheme /*, Theme, createStyles */ } from "@material-ui/core/styles";
+import React from "react";
 import Hidden from "@material-ui/core/Hidden";
-// import withWidth, { WithWidth } from "@material-ui/core/withWidth";
 
 import { makeStyles } from "@material-ui/core/styles";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -16,9 +14,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
-import ExchangeRatesForm from "./ExchangeRatesForm";
 import { CurrencyMetadata } from "../models/Currencies";
-import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles({
   root: {
@@ -59,141 +55,141 @@ const useStyles = makeStyles({
 //   }),
 // );
 
-interface ExchangeRatesProps {
-  data: ExchangeRateLatestResponse;
-}
+// interface ExchangeRatesProps {
+//   data: ExchangeRateLatestResponse;
+// }
 
-const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
-  const classes = useStyles();
+// const ExchangeRates: React.FC<ExchangeRatesProps> = ({ data }) => {
+//   const classes = useStyles();
 
-  // const theme = useTheme();
-  // const breakpoints = theme.breakpoints;
+//   // const theme = useTheme();
+//   // const breakpoints = theme.breakpoints;
 
-  // console.log("breakpoints", breakpoints);
+//   // console.log("breakpoints", breakpoints);
 
-  const [state, setState] = React.useState({
-    checkedAll: false
-    // checkedB: true,
-    // checkedF: true,
-    // checkedG: true,
-  });
+//   const [state, setState] = React.useState({
+//     checkedAll: false
+//     // checkedB: true,
+//     // checkedF: true,
+//     // checkedG: true,
+//   });
 
-  // const [
-  //   sourceCourrencyIsoCodeNormalised,
-  //   setSourceCourrencyIsoCodeNormalised
-  // ] = useState(data.base || "GBP");
+//   // const [
+//   //   sourceCourrencyIsoCodeNormalised,
+//   //   setSourceCourrencyIsoCodeNormalised
+//   // ] = useState(data.base || "GBP");
 
-  const handleChange = (name: string) => (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setState({ ...state, [name]: event.target.checked });
-  };
+//   const handleChange = (name: string) => (
+//     event: React.ChangeEvent<HTMLInputElement>
+//   ) => {
+//     setState({ ...state, [name]: event.target.checked });
+//   };
 
-  // const handleSourceCurrencyChange = (
-  //   event: React.ChangeEvent<{ value: unknown }>
-  // ) => {
-  //   setSourceCourrencyIsoCodeNormalised(event.target.value as string);
-  // };
+//   // const handleSourceCurrencyChange = (
+//   //   event: React.ChangeEvent<{ value: unknown }>
+//   // ) => {
+//   //   setSourceCourrencyIsoCodeNormalised(event.target.value as string);
+//   // };
 
-  return (
-    <>
-      <TableContainer component={Paper}>
-        <Table
-          className={classes.table}
-          size="small"
-          aria-label="Source Currency"
-        >
-          <TableHead>
-            <TableRow>
-              <TableCell className={classes.th}>Source Currency</TableCell>
-              <TableCell className={classes.th}>Date</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell component="th" scope="row">
-                {data.base}
-              </TableCell>
-              <TableCell>{data.date}</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
+//   return (
+//     <>
+//       <TableContainer component={Paper}>
+//         <Table
+//           className={classes.table}
+//           size="small"
+//           aria-label="Source Currency"
+//         >
+//           <TableHead>
+//             <TableRow>
+//               <TableCell className={classes.th}>Source Currency</TableCell>
+//               <TableCell className={classes.th}>Date</TableCell>
+//             </TableRow>
+//           </TableHead>
+//           <TableBody>
+//             <TableRow>
+//               <TableCell component="th" scope="row">
+//                 {data.base}
+//               </TableCell>
+//               <TableCell>{data.date}</TableCell>
+//             </TableRow>
+//           </TableBody>
+//         </Table>
+//       </TableContainer>
 
-      <FormGroup row style={{ margin: 10 }}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={state.checkedAll}
-              onChange={handleChange("checkedAll")}
-              value="checkedAll"
-              color="primary"
-            />
-          }
-          label="Show All"
-        />
-      </FormGroup>
+//       <FormGroup row style={{ margin: 10 }}>
+//         <FormControlLabel
+//           control={
+//             <Checkbox
+//               checked={state.checkedAll}
+//               onChange={handleChange("checkedAll")}
+//               value="checkedAll"
+//               color="primary"
+//             />
+//           }
+//           label="Show All"
+//         />
+//       </FormGroup>
 
-      <TableContainer component={Paper}>
-        <Table
-          className={classes.table}
-          size="small"
-          aria-label="Exchange Rates"
-        >
-          <TableHead>
-            <TableRow>
-              <Hidden xsDown>
-                <TableCell className={classes.th}>Target Currency</TableCell>
-              </Hidden>
-              {/* <TableCell className={classes.th}>Target</TableCell> */}
-              <TableCell className={classes.th} style={{ width: 20 }}>
-                Symbol
-              </TableCell>
-              <TableCell className={classes.th}>Name</TableCell>
+//       <TableContainer component={Paper}>
+//         <Table
+//           className={classes.table}
+//           size="small"
+//           aria-label="Exchange Rates"
+//         >
+//           <TableHead>
+//             <TableRow>
+//               <Hidden xsDown>
+//                 <TableCell className={classes.th}>Target Currency</TableCell>
+//               </Hidden>
+//               {/* <TableCell className={classes.th}>Target</TableCell> */}
+//               <TableCell className={classes.th} style={{ width: 20 }}>
+//                 Symbol
+//               </TableCell>
+//               <TableCell className={classes.th}>Name</TableCell>
 
-              <TableCell className={classes.th} align="right">
-                Rate
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {Object.entries(data.rates)
-              .sort()
-              .map(rate => {
-                const isoCode = rate[0];
+//               <TableCell className={classes.th} align="right">
+//                 Rate
+//               </TableCell>
+//             </TableRow>
+//           </TableHead>
+//           <TableBody>
+//             {Object.entries(data.rates)
+//               .sort()
+//               .map(rate => {
+//                 const isoCode = rate[0];
 
-                const willShow =
-                  state.checkedAll ||
-                  isoCode === "GBP" ||
-                  isoCode === "EUR" ||
-                  isoCode === "USD";
+//                 const willShow =
+//                   state.checkedAll ||
+//                   isoCode === "GBP" ||
+//                   isoCode === "EUR" ||
+//                   isoCode === "USD";
 
-                if (!willShow) {
-                  return null;
-                }
+//                 if (!willShow) {
+//                   return null;
+//                 }
 
-                const currencyMetadata = CurrencyMetadata[isoCode];
-                const symbol = currencyMetadata ? currencyMetadata.symbol : "";
-                const name = currencyMetadata ? currencyMetadata.name : "";
+//                 const currencyMetadata = CurrencyMetadata[isoCode];
+//                 const symbol = currencyMetadata ? currencyMetadata.symbol : "";
+//                 const name = currencyMetadata ? currencyMetadata.name : "";
 
-                return (
-                  <TableRow key={rate[0]}>
-                    {/* <TableCell>{rate[0]}</TableCell> */}
-                    <Hidden xsDown>
-                      <TableCell>{rate[0]}</TableCell>
-                    </Hidden>
-                    <TableCell style={{ width: 20 }}>{symbol}</TableCell>
-                    <TableCell>{name}</TableCell>
-                    <TableCell align="right">{rate[1].toFixed(4)}</TableCell>
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </>
-  );
-};
+//                 return (
+//                   <TableRow key={rate[0]}>
+//                     {/* <TableCell>{rate[0]}</TableCell> */}
+//                     <Hidden xsDown>
+//                       <TableCell>{rate[0]}</TableCell>
+//                     </Hidden>
+//                     <TableCell style={{ width: 20 }}>{symbol}</TableCell>
+//                     <TableCell>{name}</TableCell>
+//                     <TableCell align="right">{rate[1].toFixed(4)}</TableCell>
+//                   </TableRow>
+//                 );
+//               })}
+//           </TableBody>
+//         </Table>
+//       </TableContainer>
+//     </>
+//   );
+// };
 
 interface ExchangeRatesDateRangeProps {
   data: ExchangeRateDateRangeResponse;
@@ -214,7 +210,8 @@ const ExchangeRatesDateRange: React.FC<ExchangeRatesDateRangeProps> = ({
     setState({ ...state, [name]: event.target.checked });
   };
 
-  // const json = JSON.stringify(data, null, 2);
+  // const dataJson = JSON.stringify(data, null, 2);
+  // console.log("ExchangeRatesDateRange", "dataJson", dataJson);
 
   const getEndDateRateElement = (
     data: ExchangeRateDateRangeResponse,
@@ -257,7 +254,6 @@ const ExchangeRatesDateRange: React.FC<ExchangeRatesDateRangeProps> = ({
 
   return (
     data && (
-      // <pre>{json}</pre>
       <>
         <TableContainer component={Paper}>
           <Table
@@ -381,194 +377,17 @@ const ExchangeRatesDateRange: React.FC<ExchangeRatesDateRangeProps> = ({
             </TableBody>
           </Table>
         </TableContainer>
-
-        {/* <h1>
-          {data.start_at && (
-            <span>Start At: {data.start_at.toString() || ""}</span>
-          )}
-        </h1>
-        <pre>
-          {data.start_at &&
-            JSON.stringify(data.rates[data.start_at.toString()], null, 2)}
-        </pre>
-
-        <h1>
-          {data.end_at && <span>End At: {data.end_at.toString() || ""}</span>}
-        </h1>
-
-        <pre>
-          {data.end_at &&
-            JSON.stringify(data.rates[data.end_at.toString()], null, 2)}
-        </pre> */}
       </>
     )
   );
 };
 
-interface FetchExchangeRateLatestProps {
-  sourceCurrencyIsoCode: string;
-  endDateDaysAgo?: number
-}
+// export interface ExchangeRateLatestResponse {
+//   rates: { [key: string]: number };
 
-const FetchExchangeRateLatest = (props: FetchExchangeRateLatestProps) => {
-
-  const getDateFromDaysAgo = (daysAgo: number) => {
-    const ONE_DAY = 1000 * 60 * 60 * 24;
-
-    const daysInMilliseconds = ONE_DAY * daysAgo;
-
-    const result = new Date((new Date()).valueOf() - daysInMilliseconds);
-
-    return result;
-  }
-
-  const [data, setData] = useState<ExchangeRateLatestResponse | undefined>(
-    undefined
-  );
-
-  const [endDateDaysAgo, setEndDateDaysAgo] = useState(props.endDateDaysAgo ?? 0);
-
-  // const [previousData, setPreviousData] = useState<
-  //   ExchangeRateLatestResponse | undefined
-  // >(undefined);
-
-  const [dateRangeData, setDateRangeData] = useState<
-    ExchangeRateDateRangeResponse
-  >({
-    base: "GBP",
-    rates: {},
-    // start_at: new Date("2020-03-16"),
-    // end_at: new Date("2020-03-17")
-    start_at: getDateFromDaysAgo(endDateDaysAgo + 1),
-    end_at: getDateFromDaysAgo(endDateDaysAgo)
-  });
-
-  const [loading, setLoading] = useState(true);
-
-  const [
-    sourceCurrencyIsoCodeNormalised,
-    setSourceCurrencyIsoCodeNormalised
-  ] = useState(props.sourceCurrencyIsoCode || "GBP");
-
-  const handleSourceCurrencyChange = (
-    event: React.ChangeEvent<{ value: unknown }>
-  ) => {
-    // console.log("ExchangeRate: handleSourceCurrencyChange : START");
-    setSourceCurrencyIsoCodeNormalised(event.target.value as string);
-    // console.log("ExchangeRate: handleSourceCurrencyChange : END");
-  };
-
-  async function fetchExchangeRates() {
-    const url = `https://api.exchangeratesapi.io/latest?base=${sourceCurrencyIsoCodeNormalised}`;
-
-    const responseJson = await fetch(url);
-
-    const response: ExchangeRateLatestResponse = await responseJson.json();
-
-    setData(response);
-    setLoading(false);
-  }
-
-  // https://api.exchangeratesapi.io/2020-03-16?base=GBP
-
-  // async function fetchPreviousExchangeRates() {
-  //   const currentDate = new Date();
-  //   const currentDateIso = currentDate.toISOString();
-
-  //   console.log("fetchPreviousExchangeRates");
-
-  //   // console.log(currentDateIso);
-
-  //   // const datePrevious: string;
-  //   const dateIso = "2020-03-16";
-
-  //   console.log(dateIso);
-
-  //   const url = `https://api.exchangeratesapi.io/${dateIso}?base=${sourceCurrencyIsoCodeNormalised}`;
-
-  //   const responseJson = await fetch(url);
-
-  //   const response: ExchangeRateLatestResponse = await responseJson.json();
-
-  //   console.log(currentDateIso);
-
-  //   setPreviousData(response);
-  //   setLoading(false);
-  // }
-
-  // ExchangeRateDateRangeResponse
-
-  async function fetchExchangeRatesDateRange() {
-    const currentDate = new Date();
-    // const currentDateIso = currentDate.toISOString();
-
-    console.log("fetchExchangeRatesDateRange");
-
-    // console.log(currentDateIso);
-
-    // const datePrevious: string;
-    // const endDateDaysAgo = 2;
-    const startDateIso = getDateFromDaysAgo(endDateDaysAgo + 1).toISOString().split("T")[0];
-    const endDateIso = getDateFromDaysAgo(endDateDaysAgo).toISOString().split("T")[0];
-
-    console.log(`startDateIso = ${startDateIso}`);
-    console.log(`endDateIso = ${endDateIso}`);
-
-    const url = `https://api.exchangeratesapi.io/history?start_at=${startDateIso}&end_at=${endDateIso}&base=${sourceCurrencyIsoCodeNormalised}`;
-
-    // https://api.exchangeratesapi.io/history?start_at=2020-03-16&end_at=2020-03-17&base=GBP
-
-    const responseJson = await fetch(url);
-
-    const response: ExchangeRateDateRangeResponse = await responseJson.json();
-
-    console.log(response);
-
-    setDateRangeData(response);
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    fetchExchangeRates();
-    // fetchPreviousExchangeRates();
-    fetchExchangeRatesDateRange();
-  }, [sourceCurrencyIsoCodeNormalised]);
-
-  return (
-    <div>
-      {loading ? (
-        <div>...loading</div>
-      ) : (
-          <div>
-            {data && (
-              <>
-                <ExchangeRatesForm
-                  sourceCurrencyIsoCode={sourceCurrencyIsoCodeNormalised}
-                  handleSourceCurrencyChange={handleSourceCurrencyChange}
-                />
-                {/* <ExchangeRates data={data} /> */}
-
-                <hr></hr>
-
-                <ExchangeRatesDateRange data={dateRangeData} />
-              </>
-            )}
-          </div>
-        )}
-    </div>
-  );
-};
-
-export interface ExchangeRateLatestResponse {
-  rates: { [key: string]: number };
-
-  base: string;
-  date: Date;
-}
-
-export interface ExchangeRateMap {
-  rates: { [key: string]: number };
-}
+//   base: string;
+//   date: Date;
+// }
 
 export interface ExchangeRateDateRangeResponse {
   rates: { [key: string]: { [key: string]: number } };
@@ -578,4 +397,4 @@ export interface ExchangeRateDateRangeResponse {
   end_at: Date;
 }
 
-export default FetchExchangeRateLatest;
+export default ExchangeRatesDateRange;

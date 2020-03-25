@@ -1,16 +1,13 @@
-import React, { useState /*, useEffect */ } from "react";
+import React, { useState } from "react";
 import {
   FormGroup,
   FormControl,
   Select,
   MenuItem,
-  //   FormControlLabel,
-  //   Checkbox,
   InputLabel
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { CurrencyMetadata } from "../models/Currencies";
-// import classes from "*.module.css";
 
 const useStyles = makeStyles({
   root: {
@@ -34,7 +31,6 @@ const useStyles = makeStyles({
 
 interface ExchangeRatesFormProps {
   sourceCurrencyIsoCode: string;
-
   handleSourceCurrencyChange: (
     event: React.ChangeEvent<{ value: unknown }>
   ) => void;
@@ -43,9 +39,8 @@ interface ExchangeRatesFormProps {
 const ExchangeRatesForm: React.FC<ExchangeRatesFormProps> = (
   props: ExchangeRatesFormProps
 ) => {
-  // console.log("ExchangeRatesForm.props", props);
-
   const classes = useStyles();
+
   const [
     sourceCurrencyIsoCodeNormalised,
     setSourceCurrencyIsoCodeNormalised
@@ -72,70 +67,27 @@ const ExchangeRatesForm: React.FC<ExchangeRatesFormProps> = (
     return result;
   };
 
-  const supportedCurrencyIsoCodes = [
-    "GBP",
-    "EUR",
-    "USD",
-
-    "AUD",
-    "BGN",
-    "BRL",
-    "CAD",
-    "CHF",
-    "CNY",
-    "CZK",
-
-    "DKK",
-    "HKD",
-    "HRK",
-    "HUF",
-    "IDR",
-    "ILS",
-    "INR",
-    "ISK",
-
-    "JPY",
-    "KRW",
-    "MXN",
-    "MYR",
-    "NOK",
-    "NZD",
-    "PHP",
-    "PLN",
-    "RON",
-    "RUB",
-
-    "SEK",
-    "SGD",
-    "THB",
-    "TRY",
-    "ZAR"
-  ];
+  const supportedCurrencyIsoCodes = Object.keys(CurrencyMetadata);
+  // console.log("ExchangeRatesForm", "supportedCurrencyIsoCodes", supportedCurrencyIsoCodes);
 
   return (
-    <>
-      {/* <h1>
-        ExchangeRatesForm.sourceCurrencyIsoCodeNormalised = [
-        {sourceCurrencyIsoCodeNormalised}]
-      </h1> */}
-      <FormGroup row style={{ margin: 10 }}>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="demo-simple-select-label">Source Currency</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={sourceCurrencyIsoCodeNormalised}
-            onChange={handleSourceCurrencyChangeLocal}
-          >
-            {supportedCurrencyIsoCodes.map(isoCode => (
-              <MenuItem value={isoCode} key={isoCode}>
-                {getCurrencyItemDisplayName(isoCode)}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </FormGroup>
-    </>
+    <FormGroup row style={{ margin: 10 }}>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Source Currency</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={sourceCurrencyIsoCodeNormalised}
+          onChange={handleSourceCurrencyChangeLocal}
+        >
+          {supportedCurrencyIsoCodes.map(isoCode => (
+            <MenuItem value={isoCode} key={isoCode}>
+              {getCurrencyItemDisplayName(isoCode)}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </FormGroup>
   );
 };
 
