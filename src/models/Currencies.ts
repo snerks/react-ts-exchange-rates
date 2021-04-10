@@ -129,15 +129,16 @@ export const CurrencyMetadata: CurrencyInfoItems = {
   NAD: { "name": "Namibian Dollar", "isoCode": "NAD", symbol: "N$" },
   NGN: { "name": "Nigerian Naira", "isoCode": "NGN", symbol: "₦" },
   NIO: { "name": "Nicaraguan Córdoba", "isoCode": "NIO", symbol: "C$" },
-  
+
   NOK: { "name": "Norwegian Krone", "isoCode": "NOK", symbol: "kr" },
-  NPR: { "name": "Nepalese Rupee", "isoCode": "NPR", symbol: "£" },
-  NZD: { "name": "New Zealand Dollar", "isoCode": "NZD", symbol: "$" },
-  OMR: { "name": "Omani Rial", "isoCode": "OMR", symbol: "£" },
-  PAB: { "name": "Panamanian Balboa", "isoCode": "PAB", symbol: "£" },
-  PEN: { "name": "Peruvian Nuevo Sol", "isoCode": "PEN", symbol: "£" },
-  PGK: { "name": "Papua New Guinean Kina", "isoCode": "PGK", symbol: "£" },
+  NPR: { "name": "Nepalese Rupee", "isoCode": "NPR", symbol: "₨" },
+  NZD: { "name": "New Zealand Dollar", "isoCode": "NZD", symbol: "NZ$" },
+  OMR: { "name": "Omani Rial", "isoCode": "OMR", symbol: "ع." },
+  PAB: { "name": "Panamanian Balboa", "isoCode": "PAB", symbol: "B/." },
+  PEN: { "name": "Peruvian Nuevo Sol", "isoCode": "PEN", symbol: "S/" },
+  PGK: { "name": "Papua New Guinean Kina", "isoCode": "PGK", symbol: "K" },
   PHP: { "name": "Philippine Peso", "isoCode": "PHP", symbol: "₱" },
+  
   PKR: { "name": "Pakistani Rupee", "isoCode": "PKR", symbol: "£" },
   PLN: { "name": "Polish Zloty", "isoCode": "PLN", symbol: "zł" },
   PYG: { "name": "Paraguayan Guarani", "isoCode": "PYG", symbol: "£" },
