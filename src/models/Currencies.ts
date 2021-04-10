@@ -158,16 +158,17 @@ export const CurrencyMetadata: CurrencyInfoItems = {
   SLL: { "name": "Sierra Leonean Leone", "isoCode": "SLL", symbol: "Le" },
   SOS: { "name": "Somali Shilling", "isoCode": "SOS", symbol: "Sh.So." },
   SRD: { "name": "Surinamese Dollar", "isoCode": "SRD", symbol: "SRD" },
-  
+
   SSP: { "name": "South Sudanese Pound", "isoCode": "SSP", symbol: "£" },
   STD: {
     "name": "São Tomé and Príncipe Dobra (pre-2018)",
     "isoCode": "STD"
  , symbol: "£" },
-  STN: { "name": "São Tomé and Príncipe Dobra", "isoCode": "STN", symbol: "£" },
-  SVC: { "name": "Salvadoran Colón", "isoCode": "SVC", symbol: "£" },
-  SYP: { "name": "Syrian Pound", "isoCode": "SYP", symbol: "£" },
-  SZL: { "name": "Swazi Lilangeni", "isoCode": "SZL", symbol: "£" },
+  STN: { "name": "São Tomé and Príncipe Dobra", "isoCode": "STN", symbol: "Db" },
+  SVC: { "name": "Salvadoran Colón", "isoCode": "SVC", symbol: "₡" },
+  SYP: { "name": "Syrian Pound", "isoCode": "SYP", symbol: "LS" },
+  SZL: { "name": "Swazi Lilangeni", "isoCode": "SZL", symbol: "L" },
+  
   THB: { "name": "Thai Baht", "isoCode": "THB", symbol: "฿" },
   TJS: { "name": "Tajikistani Somoni", "isoCode": "TJS", symbol: "£" },
   TMT: { "name": "Turkmenistani Manat", "isoCode": "TMT", symbol: "£" },
