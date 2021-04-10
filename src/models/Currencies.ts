@@ -149,15 +149,16 @@ export const CurrencyMetadata: CurrencyInfoItems = {
   RWF: { "name": "Rwandan Franc", "isoCode": "RWF", symbol: "FRw" },
   SAR: { "name": "Saudi Riyal", "isoCode": "SAR", symbol: "ر.س" },
   SBD: { "name": "Solomon Islands Dollar", "isoCode": "SBD", symbol: "SI$" },
-  
-  SCR: { "name": "Seychellois Rupee", "isoCode": "SCR", symbol: "£" },
+
+  SCR: { "name": "Seychellois Rupee", "isoCode": "SCR", symbol: "SRe" },
   SDG: { "name": "Sudanese Pound", "isoCode": "SDG", symbol: "£" },
   SEK: { "name": "Swedish Krona", "isoCode": "SEK", symbol: "kr" },
-  SGD: { "name": "Singapore Dollar", "isoCode": "SGD", symbol: "$" },
+  SGD: { "name": "Singapore Dollar", "isoCode": "SGD", symbol: "S$" },
   SHP: { "name": "Saint Helena Pound", "isoCode": "SHP", symbol: "£" },
-  SLL: { "name": "Sierra Leonean Leone", "isoCode": "SLL", symbol: "£" },
-  SOS: { "name": "Somali Shilling", "isoCode": "SOS", symbol: "£" },
-  SRD: { "name": "Surinamese Dollar", "isoCode": "SRD", symbol: "£" },
+  SLL: { "name": "Sierra Leonean Leone", "isoCode": "SLL", symbol: "Le" },
+  SOS: { "name": "Somali Shilling", "isoCode": "SOS", symbol: "Sh.So." },
+  SRD: { "name": "Surinamese Dollar", "isoCode": "SRD", symbol: "SRD" },
+  
   SSP: { "name": "South Sudanese Pound", "isoCode": "SSP", symbol: "£" },
   STD: {
     "name": "São Tomé and Príncipe Dobra (pre-2018)",
