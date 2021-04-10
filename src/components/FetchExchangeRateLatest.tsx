@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { ExchangeRateHistoricalDateResponse } from "../models/Historical";
 import ExchangeRatesDateRange, { ExchangeRateDateRangeResponse } from "./ExchangeRates";
 import ExchangeRatesForm from "./ExchangeRatesForm";
 
@@ -29,6 +30,29 @@ const FetchExchangeRateLatest = (props: FetchExchangeRateLatestProps) => {
         rates: {},
         start_at: getDateFromDaysAgo(endDateDaysAgo + 1),
         end_at: getDateFromDaysAgo(endDateDaysAgo)
+    });
+
+    const [startDateData, setStartDateData] = useState<
+        // ExchangeRateDateRangeResponse
+        ExchangeRateHistoricalDateResponse
+    >({
+        base: "GBP",
+        rates: {},
+        // start_at: getDateFromDaysAgo(endDateDaysAgo + 1),
+        // end_at: getDateFromDaysAgo(endDateDaysAgo)
+        date: getDateFromDaysAgo(endDateDaysAgo),
+        success: true,
+        historical: true
+    });
+
+    const [endDateData, setEndDateData] = useState<
+        ExchangeRateHistoricalDateResponse
+    >({
+        base: "GBP",
+        rates: {},
+        date: getDateFromDaysAgo(endDateDaysAgo + 1),
+        success: true,
+        historical: true
     });
 
     const [loading, setLoading] = useState(true);
@@ -67,15 +91,39 @@ const FetchExchangeRateLatest = (props: FetchExchangeRateLatestProps) => {
             // console.log(`startDateIso = ${startDateIso}`);
             // console.log(`endDateIso = ${endDateIso}`);
 
-            const url = `https://api.exchangeratesapi.io/history?start_at=${startDateIso}&end_at=${endDateIso}&base=${sourceCurrencyIsoCodeNormalised}`;
+            // Start Date
+            // const url = `https://api.exchangeratesapi.io/history?start_at=${startDateIso}&end_at=${endDateIso}&base=${sourceCurrencyIsoCodeNormalised}`;
+            const urlStartDate = `https://api.exchangerate.host/${startDateIso}/?base=${sourceCurrencyIsoCodeNormalised}`;
+            // https://api.exchangerate.host/2020-04-04&base=GBP
 
-            const responseJson = await fetch(url);
+            const responseJsonStartDate = await fetch(urlStartDate);
 
-            const response: ExchangeRateDateRangeResponse = await responseJson.json();
+            // const response: ExchangeRateDateRangeResponse = await responseJson.json();
+            const responseStartDate: ExchangeRateHistoricalDateResponse = await responseJsonStartDate.json();
+
+            // End Date
+            const urlEndDate = `https://api.exchangerate.host/${endDateIso}/?base=${sourceCurrencyIsoCodeNormalised}`;
+            const responseJsonEndDate = await fetch(urlEndDate);
+            const responseEndDate: ExchangeRateHistoricalDateResponse = await responseJsonEndDate.json();
 
             // console.log("fetchExchangeRatesDateRange", "response", response);
 
-            setDateRangeData(response);
+            // setStartDateData(responseStartDate);
+            // setEndDateData(responseEndDate);
+
+            let dateRangeDataTemp: ExchangeRateDateRangeResponse = {
+                base: sourceCurrencyIsoCodeNormalised,
+                start_at: responseStartDate.date,
+                end_at: responseEndDate.date,
+                rates: {
+                    [startDateIso]: responseStartDate.rates,
+                    [endDateIso]: responseEndDate.rates,
+                }
+            };
+
+            console.log("dateRangeDataTemp", dateRangeDataTemp);
+            setDateRangeData(dateRangeDataTemp);
+
             setLoading(false);
         };
 
@@ -88,21 +136,21 @@ const FetchExchangeRateLatest = (props: FetchExchangeRateLatestProps) => {
             {loading ? (
                 <div>Loading...</div>
             ) : (
-                    <div>
-                        {dateRangeData && (
-                            <>
-                                <ExchangeRatesForm
-                                    sourceCurrencyIsoCode={sourceCurrencyIsoCodeNormalised}
-                                    handleSourceCurrencyChange={handleSourceCurrencyChange}
-                                />
+                <div>
+                    {dateRangeData && (
+                        <>
+                            <ExchangeRatesForm
+                                sourceCurrencyIsoCode={sourceCurrencyIsoCodeNormalised}
+                                handleSourceCurrencyChange={handleSourceCurrencyChange}
+                            />
 
-                                <hr></hr>
+                            <hr></hr>
 
-                                <ExchangeRatesDateRange data={dateRangeData} />
-                            </>
-                        )}
-                    </div>
-                )}
+                            <ExchangeRatesDateRange data={dateRangeData} />
+                        </>
+                    )}
+                </div>
+            )}
         </div>
     );
 };

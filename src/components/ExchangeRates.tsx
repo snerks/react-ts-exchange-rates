@@ -15,6 +15,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
 import { CurrencyMetadata } from "../models/Currencies";
+import { ExchangeRateHistoricalDateResponse } from "../models/Historical";
 
 const useStyles = makeStyles({
   root: {
@@ -193,6 +194,7 @@ const useStyles = makeStyles({
 
 interface ExchangeRatesDateRangeProps {
   data: ExchangeRateDateRangeResponse;
+  // data: ExchangeRateHistoricalDateResponse;
 }
 
 const ExchangeRatesDateRange: React.FC<ExchangeRatesDateRangeProps> = ({
@@ -215,40 +217,56 @@ const ExchangeRatesDateRange: React.FC<ExchangeRatesDateRangeProps> = ({
 
   const getEndDateRateElement = (
     data: ExchangeRateDateRangeResponse,
+    // data: ExchangeRateHistoricalDateResponse,
     isoCode: string
   ) => {
     return (
       <span>
-        {data.end_at &&
-          data.rates[data.end_at.toString()] &&
-          data.rates[data.end_at.toString()][isoCode].toFixed(4)}
+        {data.rates &&
+          data.rates.keys &&
+          data.rates.keys.length > 1 &&
+          data.rates[1][isoCode] &&
+          data.rates[1][isoCode].toFixed(4)}
+        {/* {data.date} */}
       </span>
     );
   };
 
   const getDirectionElement = (
-    data: ExchangeRateDateRangeResponse,
-    isoCode: string,
-    startDateRate: number
+    startDateRate: number,
+    endDateRate: number
   ) => {
     return (
-      <span>
-        {data.end_at &&
-          data.rates[data.end_at.toString()] &&
-          data.rates[data.end_at.toString()][isoCode] &&
-          data.rates[data.end_at.toString()][isoCode] > startDateRate ? (
+      <>
+        <span>
+          {endDateRate > startDateRate ? (
             <strong>
               <span style={{ color: "green" }}>⯅</span>
             </strong>
-          ) : data.end_at &&
-            data.rates[data.end_at.toString()] &&
-            data.rates[data.end_at.toString()][isoCode] &&
-            data.rates[data.end_at.toString()][isoCode] < startDateRate ? (
-              <strong>
-                <span style={{ color: "red" }}>⯆</span>
-              </strong>
-            ) : null}
-      </span>
+          ) : endDateRate < startDateRate ? (
+            <strong>
+              <span style={{ color: "red" }}>⯆</span>
+            </strong>
+          ) : null}
+        </span>
+      </>
+    );
+  };
+
+  const getMatchingEndDateRate = (
+    data: ExchangeRateDateRangeResponse,
+    isoCode: string
+  ) => {
+    console.log("data.end_at", data.end_at);
+    console.log("data.rates.keys", data.rates.keys);
+    console.log("data.rates.keys.length", data.rates.keys && data.rates.keys.length);
+    console.log("data.rates[Object.keys(data.rates)[1]][isoCode]", data.rates.keys && data.rates.keys.length > 1 && data.rates[Object.keys(data.rates)[1]][isoCode]);
+
+    return (
+      data.end_at &&
+      data.rates.keys &&
+      data.rates.keys.length > 1 &&
+      data.rates[Object.keys(data.rates)[1]][isoCode]
     );
   };
 
@@ -296,6 +314,11 @@ const ExchangeRatesDateRange: React.FC<ExchangeRatesDateRangeProps> = ({
           />
         </FormGroup>
 
+        {/* Object.entries(data.rates[0]) */}
+
+        {/* <h1>data.rates[Object.keys(data.rates)[1]]</h1>
+        <pre>{JSON.stringify(data.rates[Object.keys(data.rates)[1]], null, 2)}</pre> */}
+
         <TableContainer component={Paper}>
           <Table
             className={classes.table}
@@ -327,15 +350,19 @@ const ExchangeRatesDateRange: React.FC<ExchangeRatesDateRangeProps> = ({
             </TableHead>
             <TableBody>
               {data &&
-                data.start_at &&
-                data.end_at &&
-                data.rates[data.start_at.toString()] &&
-                data.rates[data.end_at.toString()] &&
-                Object.entries(data.rates[data.start_at.toString()])
+                // data.date &&
+                // data.date &&
+                data.rates &&
+                data.rates[Object.keys(data.rates)[0]] &&
+                // data.rates[data.date.toString()] &&
+                // Object.entries(data.rates[data.date.toString()])
+                Object.entries(data.rates[Object.keys(data.rates)[0]]) // Start Date
                   .sort()
                   .map(rate => {
+                    // const startDate = ra
                     const isoCode = rate[0];
                     const startDateRate = rate[1];
+                    const endDateRate = data.rates[Object.keys(data.rates)[1]][isoCode];
 
                     const willShow =
                       state.checkedAll ||
@@ -366,10 +393,13 @@ const ExchangeRatesDateRange: React.FC<ExchangeRatesDateRangeProps> = ({
                           {rate[1].toFixed(4)}
                         </TableCell>
                         <TableCell align="right">
-                          {getEndDateRateElement(data, isoCode)}
+                          {/* {getEndDateRateElement(data, isoCode)} */}
+                          <span>
+                            {endDateRate.toFixed(4)}
+                          </span>
                         </TableCell>
                         <TableCell align="center">
-                          {getDirectionElement(data, isoCode, startDateRate)}
+                          {getDirectionElement(startDateRate, endDateRate)}
                         </TableCell>
                       </TableRow>
                     );
